@@ -1,0 +1,26 @@
+{
+  "name": "odin-todo-list",
+  "version": "1.0.0",
+  "description": "A basic to do list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smkakitani/odin-todo-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smkakitani/odin-todo-list/issues"
+  },
+  "homepage": "https://github.com/smkakitani/odin-todo-list#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
