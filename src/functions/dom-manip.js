@@ -29,9 +29,8 @@ const sidebar = function() {
   divProject.appendChild(createProject());
   divProject.appendChild(createProjectName());
 
-  // const 
 
-  console.log(divSidebar);
+  // console.log(divSidebar);
   return divSidebar;
 };
 
