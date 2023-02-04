@@ -7,31 +7,37 @@ const createProjectName = function() {
   return addProjectName;
 };
 
-const createProject = function() {
-  const projectButton = document.createElement('button');
-  projectButton.classList.add('project-btn');
-  projectButton.textContent = "Project";
 
-  
-
-  return projectButton;
-};
-
+// render sidebar items
 const sidebar = function() {
   const divSidebar = document.getElementById('sidebar');
-  const divProject = document.createElement('div');
-  divProject.id = "project";
+  const divProject = document.getElementById('project');
+  const divProjectList = document.getElementById('project-list');
   
   // append to #sidebar
-  divSidebar.appendChild(divProject);
+  
 
   // append to #project
-  divProject.appendChild(createProject());
-  divProject.appendChild(createProjectName());
-
+  divProjectList.appendChild(createProjectName());
+  divProjectList.appendChild(createProjectName());
 
   // console.log(divSidebar);
   return divSidebar;
 };
 
-export { sidebar };
+// click project button to show/hide projects
+const eventProjectBtn = function() {
+  const projectBtn = document.querySelector('.project-btn');
+  const projectList = document.querySelector('#project-list');
+
+  projectBtn.addEventListener('click', () => {
+    if (projectList.classList.contains('hidden')) {
+      projectList.classList.remove('hidden');
+    } else if (!projectList.classList.contains('hidden')){
+      projectList.classList.add('hidden');
+    }
+  });
+};
+
+
+export { sidebar, eventProjectBtn };

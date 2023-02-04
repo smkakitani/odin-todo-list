@@ -5,21 +5,36 @@
 #sidebar {
   background-color: rgba(255, 255, 255, 0.349);
   height: 100%;
-  padding-top: 1em;
+  width: 300px;
+  padding: 1em;
 
   display: grid;
+  grid-template-rows: max-content 3fr;
+  gap: 1em;
 }
 
+#date, #project {
+  border-radius: 10px;
+  padding: 0.5em;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+}
+
+#date {
+  background-color: var(--color-purple-light);
+  height: 100px;
+  width: 75%;
+}
+
+/* Project */
 #project {
   background-color: var(--color-purple);
+  color: var(--color-white-hsl);
   height: 50%;
-  width: 300px;
-  padding: 0.5em;
-  border-radius: 10px;
+  width: 100%;
 
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  grid-template-rows: 20% repeat(auto-fill, minmax(50px, 1fr));
+  grid-template-rows: 15% max-content;
 }
 
 .project-btn {
@@ -36,16 +51,21 @@
   border: none;
 }
 
-.add-btn {
-  grid-column: 2 / 4;
+#project-list {
   grid-row: 2;
+  grid-column: 2 / 4;
 
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.add-btn {
   color: var(--color-grey);
   background-color: var(--color-purple);
 
   font-family: 'Comfortaa', cursive, sans-serif;
   font-size: 1rem;
-
   border: none;
 }
 
