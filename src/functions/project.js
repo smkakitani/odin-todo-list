@@ -55,6 +55,7 @@ const removeTask = (projectIndex, taskIndex) => {
   projectList[projectIndex].task[taskIndex];
 };
 
+// update project and tasks
 
 
 

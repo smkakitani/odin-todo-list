@@ -1,0 +1,84 @@
+main {
+  background-color: rgb(90, 119, 90);
+}
+
+#content {
+  padding: 1em;
+  height: 100%;
+
+  display: grid;
+}
+
+.project-container {
+  background-color: aliceblue;
+  font-family: 'Comfortaa', cursive, sans-serif;
+  height: 100%;
+  width: max(60%, 500px);
+  padding: 1em;
+
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-container p:first-child {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0 0 0.5em;
+  border-bottom: 2px solid black;
+}
+
+/* tasks container */
+.project-task  {
+  background-color: blueviolet;
+  height: 200px;
+  width: 100%;
+  padding: 0.7em;
+
+  border-radius: 15px;
+  display: flex;
+  gap: 0.5em;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.project-task p:focus {
+  outline: none;
+  border: 1px solid white;
+  border-radius: 3px;
+  padding: 0.25em 0.35em;
+}
+
+.project-task > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.check-btn {
+  font-size: 1.5rem;
+  height: 25px;
+  width: 25px;
+  border: 2px solid black;
+}
+
+.check-btn:hover {
+  cursor: pointer;
+}
+
+.task-name {
+  color: white;
+  font-size: 1rem;
+}
+
+.task-description {
+  color: white;
+  font-size: 0.85rem;
+}
+
+.project-task > input[type=date] {
+  font-family: inherit;
+  align-self: flex-end;
+}

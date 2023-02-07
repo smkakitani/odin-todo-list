@@ -20,22 +20,42 @@
       <h1>MyTodoList</h1>
     </div>
   </header>
+  <div id="name-form" class="hidden">
+    <button type="button" class="close-form">❌</button>
+    <form action="#">
+      <label for="project-name">Project's name: </label>
+      <input type="text" name="name" id="project-name" maxlength="32">
+      <button type="submit" class="submit">add</button>
+    </form>
+  </div>
   <aside>
     <div id="sidebar">
       <div id="date"></div>
       <div id="project">
-        <button class="project-btn">Project</button>
+        <p>Projects</p>
         <div id="project-list" class="">
+          <button class="add-btn">+ add project</button>
         </div>
       </div>
     </div>
   </aside>
   <main>
-    <div id="content"></div>
+    <div id="content">
+      <div class="project-container">
+        <p contenteditable="true" class="name-project">Project name</p>
+        <div class="project-task">
+          <div>
+            <button type="button" class="check-btn">&check;</button>
+            <p contenteditable="" class="task-name">First task</p>
+          </div>
+          <p contenteditable="" class="task-description">This is something a task description text lalalal.</p>
+          <input type="date" name="due-date" id="due-date">
+        </div>
+      </div>
+    </div>
   </main>
   <footer>
-
+    <p>oioioioio</p>
   </footer>
-  
 </body>
 </html>
