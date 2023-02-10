@@ -4,19 +4,18 @@ import './styles/sidebar.css';
 import './styles/main-content.css';
 
 // js
-// import { sidebar} from './functions/dom-element';
+import { addProjectName } from './functions/dom-element';
 import { eventNameForm } from './functions/dom-manip';
 import { projectList, createProject, createTask, addProject, addTask } from './functions/project';
 
 console.log("index.js");
 
-// sidebar();
+
 eventNameForm().openNameForm();
 eventNameForm().closeNameForm();
 eventNameForm().submitName();
 
-// renderProject();
-// renderTask();
+
 
 const myTask = createTask('some title', 'something something', 'some date');
 const cocoPro = createProject("coco");

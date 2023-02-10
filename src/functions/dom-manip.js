@@ -50,7 +50,7 @@ const eventNameForm = () => {
       createProjectNameBtn(projectName);
       
       console.log(projectName);
-      ele.preventDefault();
+      ele.preventDefault(); // won´t let submit btn close form div
     });
   };
   

@@ -54,7 +54,7 @@ const renderProject = function(indexProject) {
   const projectName = document.createElement('p');
   projectName.classList.add('project-name');
   projectName.setAttribute('contenteditable', 'true');
-  projectName.textContent = "Project Name";
+  projectName.textContent = `${indexProject.projectTitle}`;
 
   divProjectContainer.appendChild(projectName);
 
