@@ -46,14 +46,12 @@ const eventNameForm = () => {
     submitBtn.addEventListener('submit', (ele) => {
       const projectName = document.querySelector('#project-name').value;
 
-      // get projectName and send to div project and button project
-      const newProject = createProject(projectName); // use Factory Function to create a new project
-      addProjectToList(newProject); // add newProject to projectList
+      // get projectName to create project using Factory Function and add it to projectList
+      const newProject = createProject(projectName);
+      addProjectToList(newProject);
       
-      // get index of new project
+      // get index of new project to send to project's name button
       const indexOfProject = projectList.indexOf(newProject);
-
-      // create btn with project's name and index
       createProjectNameBtn(projectName, indexOfProject); 
 
       console.log(indexOfProject);
