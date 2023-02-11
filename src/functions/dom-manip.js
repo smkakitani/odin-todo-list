@@ -13,7 +13,8 @@
 }; */
 
 // import
-import { createProjectNameBtn } from './dom-element';
+import { createProjectNameBtn, renderProject } from './dom-element';
+import { projectList, createProject, addProjectToList } from './project';
 
 
 
@@ -21,23 +22,22 @@ const eventNameForm = () => {
   const nameForm = document.querySelector('#name-form');
   const addProjectBtn = document.querySelector('.add-btn');
 
+  const showHideNameForm = () => {
+    if (nameForm.classList.contains('hidden')) {
+      nameForm.classList.remove('hidden');
+    } else {
+      nameForm.classList.add('hidden');
+    }
+    console.log('show or hide name form');
+  };
+
   const openNameForm = () => {
-    addProjectBtn.addEventListener('click', () => {
-      if (nameForm.classList.contains('hidden')) {
-        nameForm.classList.remove('hidden');
-      } else {
-        nameForm.classList.add('hidden');
-      }
-      // console.log('aaaa');
-    });
+    addProjectBtn.addEventListener('click', showHideNameForm)
   };
 
   const closeNameForm = () => {
     const closeForm = document.querySelector('.close-form');
-    closeForm.addEventListener('click', (event) => {
-      nameForm.classList.add('hidden');
-      console.log(event.target);
-    });
+    closeForm.addEventListener('click', showHideNameForm)
   };
 
   const submitName = () => {
@@ -47,9 +47,17 @@ const eventNameForm = () => {
       const projectName = document.querySelector('#project-name').value;
 
       // get projectName and send to div project and button project
-      createProjectNameBtn(projectName);
+      const newProject = createProject(projectName); // use Factory Function to create a new project
+      addProjectToList(newProject); // add newProject to projectList
       
-      console.log(projectName);
+      // get index of new project
+      const indexOfProject = projectList.indexOf(newProject);
+
+      // create btn with project's name and index
+      createProjectNameBtn(projectName, indexOfProject); 
+
+      console.log(indexOfProject);
+      showHideNameForm();
       ele.preventDefault(); // won´t let submit btn close form div
     });
   };
@@ -60,6 +68,14 @@ const eventNameForm = () => {
     openNameForm,
     closeNameForm,
     submitName,
+  };
+};
+
+const openProjectName = () => {
+  const divContent = document.querySelector('#content');
+
+  const selectProjectName = () => {
+
   };
 };
 

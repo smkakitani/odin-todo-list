@@ -39,7 +39,7 @@ const createProject = (title) => {
   };
 };
 
-const addProject = (newProject) => {
+const addProjectToList = (newProject) => {
   projectList.push(newProject);
 };
 
@@ -61,4 +61,4 @@ const removeTask = (projectIndex, taskIndex) => {
 
 
 
-export { projectList, createProject, createTask, addProject, addTask };
+export { projectList, createProject, createTask, addProjectToList, addTask };

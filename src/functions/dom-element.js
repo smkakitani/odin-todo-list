@@ -1,4 +1,9 @@
-const renderTask = function() {
+// import
+// import { projectList } from './project';
+
+
+
+const createTask = function() {
   const divProjectContainer = document.getElementsByClassName('project-container')[1]; // NEED TO CHANGE HERE LATER!!!!!!!!!!!!!!!!!!
 
   // div .project-task
@@ -62,10 +67,11 @@ const renderProject = function(indexProject) {
   return divProjectContainer;
 };
 
-const createProjectNameBtn = function(projName) {
+const createProjectNameBtn = function(projName, projIndex) {
   const projectList = document.querySelector('#project-list');
   const addProjectName = document.createElement('button');
   addProjectName.classList.add('project-btn');
+  addProjectName.setAttribute('data-index', `${projIndex}`);
   addProjectName.textContent = `${projName}`;
 
   projectList.appendChild(addProjectName);
@@ -76,4 +82,4 @@ const createProjectNameBtn = function(projName) {
 
 
 
-export { createProjectNameBtn };
+export { createProjectNameBtn, renderProject };

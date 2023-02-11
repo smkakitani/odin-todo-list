@@ -19,10 +19,18 @@ eventNameForm().submitName();
 
 const myTask = createTask('some title', 'something something', 'some date');
 const cocoPro = createProject("coco");
+
+
+
 // projectList.push(cocoPro);
 // projectList[2].task.push(myTask);
+
 // addProject(cocoPro)
 // addTask("2", myTask)
+// console.log(projectList)
+
+// const indexOfProject = projectList.indexOf(cocoPro);
+// console.log(indexOfProject);
 
 
 // console.log(projectList[1].task);
