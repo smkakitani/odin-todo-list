@@ -4,21 +4,48 @@ import './styles/sidebar.css';
 import './styles/main-content.css';
 
 // js
-import { addProjectName } from './functions/dom-element';
+import { addProjectName, renderTask, createProjectNameBtn } from './functions/dom-element';
 import { eventNameForm } from './functions/dom-manip';
-import { projectList, createProject, createTask, addProject, addTask } from './functions/project';
+import { projectList, createProject, createTask, addProjectToList, addTaskToProject } from './functions/project';
 
 console.log("index.js");
 
-
+// /dom-manip
 eventNameForm().openNameForm();
 eventNameForm().closeNameForm();
 eventNameForm().submitName();
 
+// /dom-element.js
+renderTask();
 
 
-const myTask = createTask('some title', 'something something', 'some date');
-const cocoPro = createProject("coco");
+
+
+const initialProject = () => {
+  // create default project and task
+  const defaultProjectTitle = "My Project Name";
+  const firstProject = createProject(defaultProjectTitle);
+  const firstTask = createTask('Cat', '12 pm - feed Meow', 'some date');
+  const secondTask = createTask('Plants', 'Remember to water plants!', 'some date');
+
+  // add default project to projectList
+  addProjectToList(firstProject);
+
+  const indexOfProject = projectList.indexOf(firstProject);
+
+  // add project's button
+  createProjectNameBtn(defaultProjectTitle, indexOfProject);
+
+  // add task to project
+  addTaskToProject(indexOfProject, firstTask);
+  addTaskToProject(indexOfProject, secondTask);
+
+  
+  console.log(projectList)
+};
+
+initialProject();
+// console.log(projectList)
 
 
 

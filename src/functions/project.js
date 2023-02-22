@@ -1,6 +1,6 @@
 // list of projects
 const projectList = [
-  {
+  /* {
     projectTitle: "first project",
     task: [
       {
@@ -18,7 +18,7 @@ const projectList = [
   {
     projectTitle: "second project",
     task: []
-  }
+  } */
 ];
 
 // create task
@@ -43,7 +43,7 @@ const addProjectToList = (newProject) => {
   projectList.push(newProject);
 };
 
-const addTask = (projectIndex, newTask) => {
+const addTaskToProject = (projectIndex, newTask) => {
   projectList[projectIndex].task.push(newTask);
 };
 
@@ -61,4 +61,4 @@ const removeTask = (projectIndex, taskIndex) => {
 
 
 
-export { projectList, createProject, createTask, addProjectToList, addTask };
+export { projectList, createProject, createTask, addProjectToList, addTaskToProject };
