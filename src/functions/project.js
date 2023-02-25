@@ -52,7 +52,7 @@ const removeProject = (projectIndex) => {
 };
 
 const removeTask = (projectIndex, taskIndex) => {
-  projectList[projectIndex].task[taskIndex];
+  projectList[projectIndex].task.splice(taskIndex, 1);
 };
 
 // update project and tasks
@@ -61,4 +61,4 @@ const removeTask = (projectIndex, taskIndex) => {
 
 
 
-export { projectList, createProject, createTask, addProjectToList, addTaskToProject };
+export { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask };

@@ -4,48 +4,81 @@ import './styles/sidebar.css';
 import './styles/main-content.css';
 
 // js
-import { addProjectName, renderTask, createProjectNameBtn } from './functions/dom-element';
-import { eventNameForm } from './functions/dom-manip';
+import { addProjectName, renderTask, renderProject, createProjectNameBtn, TaskFactory } from './functions/dom-element';
+import { eventNameForm, openProjectName, eventTaskForm, eventAddTask } from './functions/dom-manip';
 import { projectList, createProject, createTask, addProjectToList, addTaskToProject } from './functions/project';
 
 console.log("index.js");
+
+
+
+// create a default project
+const initialProject = () => {
+  let currentDay = new Date().toISOString().slice(0, 10);
+
+  // create default project and task
+  const defaultProjectTitle = "My Project Name";
+  
+  const firstProject = createProject(defaultProjectTitle);
+  const secondProject = createProject("Another Project");
+  const firstTask = createTask('Cat', '12 pm - feed Meow', currentDay);
+  const secondTask = createTask('Plants', 'Remember to water plants!', currentDay);
+
+  // add default project to projectList
+  addProjectToList(firstProject);
+  addProjectToList(secondProject);
+
+  const indexOfProject = projectList.indexOf(firstProject);
+  const indexOfProject2 = projectList.indexOf(secondProject);
+
+  // add project's button
+  createProjectNameBtn(defaultProjectTitle, indexOfProject);
+  createProjectNameBtn(secondProject.projectTitle, indexOfProject2);
+
+  // add task to project
+  addTaskToProject(indexOfProject, firstTask);
+  // addTaskToProject(indexOfProject, secondTask);
+
+  // render project
+  renderProject(indexOfProject);
+
+  // render tasks
+  renderTask(indexOfProject);
+
+  
+};
+initialProject();
 
 // /dom-manip
 eventNameForm().openNameForm();
 eventNameForm().closeNameForm();
 eventNameForm().submitName();
+openProjectName().openProject();
+eventTaskForm().openEditTask();
+eventTaskForm().cancelEditTask();
+eventTaskForm().submitTaskForm();
+eventTaskForm().deleteTask();
+eventAddTask();
+
+// console.log(eventTaskForm());
 
 // /dom-element.js
-renderTask();
+// renderTask();
 
 
 
 
-const initialProject = () => {
-  // create default project and task
-  const defaultProjectTitle = "My Project Name";
-  const firstProject = createProject(defaultProjectTitle);
-  const firstTask = createTask('Cat', '12 pm - feed Meow', 'some date');
-  const secondTask = createTask('Plants', 'Remember to water plants!', 'some date');
 
-  // add default project to projectList
-  addProjectToList(firstProject);
+/* for (const ele of projectList[0].task) {
+  console.log(ele);
+}; */
 
-  const indexOfProject = projectList.indexOf(firstProject);
+/* const currentProject = projectList[indexOfProject];
+const storedTask = currentProject.task;
 
-  // add project's button
-  createProjectNameBtn(defaultProjectTitle, indexOfProject);
-
-  // add task to project
-  addTaskToProject(indexOfProject, firstTask);
-  addTaskToProject(indexOfProject, secondTask);
-
-  
-  console.log(projectList)
-};
-
-initialProject();
-// console.log(projectList)
+for (const element of storedTask) {
+  console.log(element)
+} */
 
 
 
@@ -62,9 +95,3 @@ initialProject();
 
 // console.log(projectList[1].task);
 // console.log(projectList[2]);
-
-
-
-
-
-// console.log(myTask.title);

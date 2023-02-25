@@ -1,18 +1,20 @@
 // import
-// import { projectList } from './project';
+import { projectList } from './project';
 
-const TaskFactory = (taskName, taskDate, taskDescription) => {
-  const divTaskContainer = document.createElement('div');
-  divTaskContainer.classList.add('task-container');
+const TaskFactory = (indexOfProject, indexOfTask) => {
+  const taskTitle = projectList[indexOfProject].task[indexOfTask].taskTitle;
+  const taskDescription = projectList[indexOfProject].task[indexOfTask].description;
+  const taskDate = projectList[indexOfProject].task[indexOfTask].date;
 
-  const divProjectTask = document.createElement('div')
+  // div project-task
+  const divProjectTask = document.createElement('div');
   divProjectTask.classList.add('project-task');
-  divTaskContainer.appendChild(divProjectTask);
+  divProjectTask.setAttribute('data-task-index', `${indexOfTask}`);
 
   // task name
   const paraTaskName = document.createElement('p');
   paraTaskName.classList.add('task-name');
-  paraTaskName.textContent = `${taskName}`;
+  paraTaskName.textContent = `${taskTitle}`;
   divProjectTask.appendChild(paraTaskName);
 
   // task date
@@ -48,13 +50,15 @@ const TaskFactory = (taskName, taskDate, taskDescription) => {
   deleteButton.appendChild(iconDeleteButton);
   divProjectTask.appendChild(deleteButton);
 
-  // divProjectContainer.appendChild(divTaskContainer);
-  return divTaskContainer;
+
+  // console.log(taskDate);
+  return divProjectTask;
 };
 
-const createTaskForm = () => {
+const createTaskForm = (indexOfProject, indexOfTask) => {
   const divTaskForm = document.createElement('div');
   divTaskForm.classList.add('task-form');
+  divTaskForm.setAttribute('data-task-index', `${indexOfTask}`);
 
   // form element
   const taskForm = document.createElement('form');
@@ -72,6 +76,7 @@ const createTaskForm = () => {
   labelName.textContent = 'Name';
   inputName.id = 'form-name';
   inputName.maxLength = '24';
+  inputName.value = `${projectList[indexOfProject].task[indexOfTask].taskTitle}`;
 
   taskForm.appendChild(paraName);
   paraName.appendChild(labelName);
@@ -88,7 +93,7 @@ const createTaskForm = () => {
   textAreaDescription.id = 'form-description';
   textAreaDescription.cols = '10';
   textAreaDescription.rows = '5';
-  textAreaDescription.placeholder = 'Remember to feed cat';
+  textAreaDescription.value = `${projectList[indexOfProject].task[indexOfTask].description}`;
 
   taskForm.appendChild(paraDescription);
   paraDescription.appendChild(labelDescription);
@@ -104,7 +109,7 @@ const createTaskForm = () => {
   inputDueDate.type = 'date';
   inputDueDate.name = 'due-date';
   inputDueDate.id = 'form-due-date';
-  inputDueDate.value = ' ';
+  inputDueDate.value = `${projectList[indexOfProject].task[indexOfTask].date}`;
 
   taskForm.appendChild(paraDueDate);
   paraDueDate.appendChild(labelDueDate);
@@ -131,44 +136,59 @@ const createTaskForm = () => {
   return divTaskForm;
 };
 
-const renderTask = function() {
-  const mainContent = document.querySelector('#content');
-  const divProjectContainer = document.querySelector('.project-container');
+const renderTask = (indexProject) => {
+  const divTaskContainer = document.querySelector('.task-container');
 
-  // example
-  const defaultTask = TaskFactory("Gatinho", "18/08/1991", "Apsoidjoqwjdopq ijdioasjdqp asidjdakldjqwj akjsdaoijq malsjkd");
-  divProjectContainer.appendChild(defaultTask);
+  const currentProject = projectList[indexProject];
+  const storedTask = currentProject.task;
 
-  // form task
-  const taskContainer = document.querySelector('.task-container');
-  taskContainer.appendChild(createTaskForm());
-  // console.log(taskContainer);
-  //  createTaskForm();
-  
-  return {
-    defaultTask
+  for (let i = 0; i < storedTask.length; i++) {
+    // create div .task-wrapper and append it to .task-container
+    const divTaskWrapper = document.createElement('div');
+    divTaskWrapper.classList.add('task-wrapper');
+    divTaskContainer.appendChild(divTaskWrapper);
+
+    // create new task and append it to .task-wrapper
+    let newTask = TaskFactory(indexProject, i);
+
+    divTaskWrapper.appendChild(newTask);
+    // console.log(newTask);
   }
 };
 
-const renderProject = function(indexProject) {
-  const divContent = document.querySelector('#content');
+const renderProject = (projectIndex)  => {
+  // define .project-container's data-project-index
+  const divProjectContainer = document.querySelector('.project-container');
+  divProjectContainer.setAttribute('data-project-index', `${projectIndex}`);
 
-  // create project-container and append to #content
-  const divProjectContainer = document.createElement('div');
-  divProjectContainer.classList.add('project-container');
-  divProjectContainer.setAttribute('data-index', `${indexProject}`);
 
-  divContent.appendChild(divProjectContainer)
+  // create paragraph of name-project
+  const nameOfProject = projectList[projectIndex].projectTitle;
+  const paraProjectName = document.createElement('p');
+  paraProjectName.classList.add('name-project');
+  paraProjectName.textContent = `${nameOfProject}`;
 
-  // create project-name
-  const projectName = document.createElement('p');
-  projectName.classList.add('project-name');
-  projectName.setAttribute('contenteditable', 'true');
-  projectName.textContent = `${indexProject.projectTitle}`;
+  divProjectContainer.appendChild(paraProjectName);
 
-  divProjectContainer.appendChild(projectName);
 
-  // console.log(divContent);
+  // create div .task-container
+  const divTaskContainer = document.createElement('div');
+  divTaskContainer.classList.add('task-container');
+
+  divProjectContainer.appendChild(divTaskContainer);
+
+
+  // create div for add task button
+  const divAddTask = document.createElement('div');
+  const btnAddTask = document.createElement('button');
+  btnAddTask.type = 'button';
+  btnAddTask.id = 'add-task';
+  btnAddTask.textContent = '+ add task';
+
+  divProjectContainer.appendChild(divAddTask);
+  divAddTask.appendChild(btnAddTask);
+  
+
   return divProjectContainer;
 };
 
@@ -176,7 +196,7 @@ const createProjectNameBtn = function(projName, projIndex) {
   const projectList = document.querySelector('#project-list');
   const addProjectName = document.createElement('button');
   addProjectName.classList.add('project-btn');
-  addProjectName.setAttribute('data-index', `${projIndex}`);
+  addProjectName.setAttribute('data-project-index', `${projIndex}`);
   addProjectName.textContent = `${projName}`;
 
   projectList.appendChild(addProjectName);
@@ -187,4 +207,4 @@ const createProjectNameBtn = function(projName, projIndex) {
 
 
 
-export { createProjectNameBtn, renderProject, renderTask };
+export { createProjectNameBtn, renderProject, renderTask, TaskFactory, createTaskForm };
