@@ -14,7 +14,7 @@ const eventNameForm = () => {
     } else {
       nameForm.classList.add('hidden');
     }
-    console.log('show or hide name form');
+    // console.log('show or hide name form');
   };
 
   const openNameForm = () => {
@@ -54,7 +54,6 @@ const eventNameForm = () => {
 };
 
 const openProjectName = () => {
-  // const divContent = document.querySelector('#content');
   const divProjectList = document.querySelector('#project-list');  
 
   const openProject = () => {
@@ -82,7 +81,7 @@ const openProjectName = () => {
 };
 
 const eventTaskForm = () => {
-  const btnTask = document.querySelector('.task-container');
+  const btnTask = document.querySelector('.project-container');
 
   const removeTaskDom = () => {
     const parentNode = document.querySelector('.task-container');
@@ -151,7 +150,7 @@ const eventTaskForm = () => {
 
         // remove .task-form from current .task-wrapper
         eventTaskWrapper.removeChild(eventTaskForm);
-        
+
         // console.log('cancel edit task');
       } else {
         return;
@@ -192,10 +191,10 @@ const eventAddTask = () => {
   const newTask = createTask('Task Title', 'Add a description here!', currentDay);
 
   btnAddTask.addEventListener('click', (event) => {
-    const eventBtn = event.target;
-    const eventProjectIndex = eventBtn.parentNode.parentNode.dataset.projectIndex;
+    if (event.target.tagName === "BUTTON" && event.target.matches('#add-task')) {
+      const eventBtn = event.target;
+      const eventProjectIndex = eventBtn.parentNode.parentNode.dataset.projectIndex;
 
-    if (eventBtn.tagName === "BUTTON" && eventBtn.id === "add-task") {
       // add default task to current project
       addTaskToProject(eventProjectIndex, newTask);
 
@@ -203,11 +202,10 @@ const eventAddTask = () => {
       removeTaskDom();
       renderTask(eventProjectIndex);
 
-      console.log(eventBtn);
+      // console.log('add task');
     } else {
       return;
     }
-    // console.log(eventBtn.tagName);
   });
 
   const removeTaskDom = () => {
@@ -217,8 +215,6 @@ const eventAddTask = () => {
         parentNode.removeChild(parentNode.firstChild);
       };
   };
-
-  // console.log(btnAddTask);
 };
 
 export { eventNameForm, openProjectName, eventTaskForm, eventAddTask };

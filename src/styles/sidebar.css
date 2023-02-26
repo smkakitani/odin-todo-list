@@ -77,6 +77,8 @@
 
 .add-btn:hover, .project-btn:hover {
   cursor: pointer;
+  border: 1px solid white;
+  border-radius: 3px;
 }
 
 /* floating form */
