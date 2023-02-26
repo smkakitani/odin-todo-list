@@ -194,12 +194,29 @@ const renderProject = (projectIndex)  => {
 
 const createProjectNameBtn = function(projName, projIndex) {
   const projectList = document.querySelector('#project-list');
+
+  // div for each button
+  const divProjectName = document.createElement('div');
+  divProjectName.classList.add('project-name-container');
+
+  // button with project index
   const addProjectName = document.createElement('button');
   addProjectName.classList.add('project-btn');
   addProjectName.setAttribute('data-project-index', `${projIndex}`);
   addProjectName.textContent = `${projName}`;
 
-  projectList.appendChild(addProjectName);
+  // edit icon
+  const iconEditNameProject = document.createElement('span');
+  iconEditNameProject.classList.add('material-symbols-outlined');
+  iconEditNameProject.textContent = 'edit ';
+  
+
+
+
+  
+  divProjectName.appendChild(addProjectName);
+  divProjectName.appendChild(iconEditNameProject);
+  projectList.appendChild(divProjectName);
 
   return addProjectName;
 };
