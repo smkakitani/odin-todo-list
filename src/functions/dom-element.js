@@ -201,21 +201,25 @@ const createProjectNameBtn = function(projName, projIndex) {
 
   // button with project index
   const addProjectName = document.createElement('button');
+  addProjectName.type = 'button';
   addProjectName.classList.add('project-btn');
   addProjectName.setAttribute('data-project-index', `${projIndex}`);
   addProjectName.textContent = `${projName}`;
 
   // edit icon
   const iconEditNameProject = document.createElement('span');
+  const btnIconEditName = document.createElement('button');
   iconEditNameProject.classList.add('material-symbols-outlined');
   iconEditNameProject.textContent = 'edit ';
+  btnIconEditName.type = 'button';
+  btnIconEditName.classList.add('project-edit', 'grow');
+
+  btnIconEditName.appendChild(iconEditNameProject);
   
 
 
-
-  
   divProjectName.appendChild(addProjectName);
-  divProjectName.appendChild(iconEditNameProject);
+  divProjectName.appendChild(btnIconEditName);
   projectList.appendChild(divProjectName);
 
   return addProjectName;

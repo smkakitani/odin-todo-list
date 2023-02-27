@@ -9,7 +9,7 @@
   padding: 1em;
 
   display: grid;
-  grid-template-rows: max-content 3fr;
+  grid-template-rows: max-content 3fr max-content;
   gap: 1em;
 }
 
@@ -29,12 +29,12 @@
 #project {
   background-color: var(--color-purple);
   color: var(--color-white-hsl);
-  height: 50%;
+  height: fit-content;
   width: max(90%, 300px);
 
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  grid-template-rows: 15% max-content;
+  grid-template-rows: max-content max-content;
 }
 
 #project > p:first-child {
@@ -63,14 +63,15 @@
 .project-name-container {
   display: flex;
   gap: 1em;
-  /* height: 60px; */
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .add-btn, .project-btn {
   color: var(--color-grey);
   background-color: transparent;
   height: 2.5em;
-  /* padding: 0.5em; */
+  padding: 0.25em;
 
   font-family: 'Comfortaa', cursive, sans-serif;
   font-size: 1.1rem;
@@ -88,15 +89,25 @@
   border-radius: 3px;
 }
 
-/* floating form */
+.project-edit {
+  background-color: transparent;
+  color: var(--color-white-hsl);
+  border: none;
+}
+
+.project-edit:hover {
+  cursor: pointer;
+}
+
+/* new project form */
 #name-form {
-  position: absolute;
+  /* position: absolute;
   top: 320px;
-  left: 290px;
+  left: 290px; */
 
   background-color: var(--color-purple);
   height: max-content;
-  width: 300px;
+  width: 100%;
   padding: 1em;
   font-family: 'Comfortaa', cursive, sans-serif;
 
@@ -131,7 +142,7 @@
   border-radius: 3px;
 }
 
-#name-form .submit {
+#name-form .submit-project {
   font-family: 'Comfortaa', cursive, sans-serif;
   font-size: 1.25rem;
 
@@ -140,12 +151,81 @@
   width: max-content;
   align-self: center;
 
-  border: 2px solid var(--color-purple-light);
+  border: 1px solid var(--color-purple);
   background-color: transparent;
   color: var(--color-white-hsl);
-  border-radius: 5px;
+  border-radius: 3px;
+}
+
+#name-form .submit-project:hover {
+  border: 1px solid var(--color-white-hsl);
+  background-color: transparent;
+  color: var(--color-white-hsl);
+  border-radius: 3px;
 }
 
 #name-form button:hover {
   cursor: pointer;
 }
+
+/* edit project name form */
+#edit-project-name {
+  background-color: var(--color-purple-light);
+  height: max-content;
+  width: 100%;
+  padding: 1em;
+  font-family: 'Comfortaa', cursive, sans-serif;
+
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.close-name {
+  color: var(--color-white-hsl);
+  background-color: transparent;
+  border: none;
+  font-size: 1.8rem;
+}
+
+#edit-project-name form {
+  color: var(--color-white-hsl);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+}
+
+#edit-project-name input {
+  font-family: inherit;
+  padding: 0.2em 0.3em;
+  height: 2em;
+
+  border: none;
+  border-radius: 3px;
+}
+
+#edit-project-name .submit-edit-name {
+  font-family: 'Comfortaa', cursive, sans-serif;
+  font-size: 1.25rem;
+
+  padding: 0.25em 0.3em;
+  width: max-content;
+  align-self: center;
+  
+  background-color: transparent;
+  color: var(--color-white-hsl);
+  border: 1px solid var(--color-purple-light);
+  border-radius: 3px;
+}
+
+#edit-project-name .submit-edit-name:hover {
+  border: 1px solid var(--color-white-hsl);
+  border-radius: 3px;
+}
+
+#edit-project-name button:hover {
+  cursor: pointer;
+}
+

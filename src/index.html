@@ -21,14 +21,7 @@
       <h1>MyTodoList</h1>
     </div>
   </header>
-  <div id="name-form" class="hidden">
-    <button type="button" class="close-form">❌</button>
-    <form action="#">
-      <label for="project-name">Project's name: </label>
-      <input type="text" name="name" id="project-name" maxlength="32">
-      <button type="submit" class="submit">add</button>
-    </form>
-  </div>
+
   <aside>
     <div id="sidebar">
       <div id="date"></div>
@@ -37,6 +30,22 @@
         <div id="project-list" class="">
           <div><button class="add-btn">+ add project</button></div>
         </div>
+      </div>
+      <div id="name-form" class="hidden">
+        <button type="button" class="close-form grow">❌</button>
+        <form action="#">
+          <label for="project-name">Project's name: </label>
+          <input type="text" name="name" id="project-name" maxlength="32">
+          <button type="submit" class="submit-project">add</button>
+        </form>
+      </div>
+      <div id="edit-project-name">
+        <button type="button" class="close-name grow">❌</button>
+        <form action="#">
+          <label for="edit-name">New name: </label>
+          <input type="text" name="edit-name" id="edit-name" maxlength="32">
+          <button type="submit" class="submit-edit-name">save</button>
+        </form>
       </div>
     </div>
   </aside>
