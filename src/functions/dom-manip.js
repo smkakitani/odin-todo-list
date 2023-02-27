@@ -1,5 +1,5 @@
 // import
-import { createProjectNameBtn, renderProject, renderTask, createTaskForm } from './dom-element';
+import { createProjectNameBtn, renderProject, renderTask, createTaskForm, createProjectNewNameForm } from './dom-element';
 import { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask } from './project';
 
 
@@ -217,4 +217,35 @@ const eventAddTask = () => {
   };
 };
 
-export { eventNameForm, openProjectName, eventTaskForm, eventAddTask };
+const openProjectEditName = () => {
+  const divSidebar = document.querySelector('#sidebar');
+  const btnProjectName = document.querySelector('#project-list');
+
+  const openEditProject = () => {
+    btnProjectName.addEventListener('click', (event) => {
+      if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('project-edit')) {
+        const eventBtn = event.target.parentNode;
+        const eventProjectIndex = eventBtn.previousSibling.dataset.projectIndex;
+        const sidebarLastElement = divSidebar.lastElementChild;
+
+        if (sidebarLastElement.id !== 'edit-project-name') {
+          const newNameForm = createProjectNewNameForm(eventProjectIndex);
+          divSidebar.appendChild(newNameForm);          
+        } else {
+          return;
+        }
+      }
+    });
+  };
+
+  const closeEditProject = () => {
+
+  };
+
+  return {
+    openEditProject,
+    closeEditProject,
+  }
+};
+
+export { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName };

@@ -4,8 +4,8 @@ import './styles/sidebar.css';
 import './styles/main-content.css';
 
 // js
-import { addProjectName, renderTask, renderProject, createProjectNameBtn, TaskFactory } from './functions/dom-element';
-import { eventNameForm, openProjectName, eventTaskForm, eventAddTask } from './functions/dom-manip';
+import { addProjectName, renderTask, renderProject, createProjectNameBtn, TaskFactory, createProjectNewNameForm } from './functions/dom-element';
+import { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName } from './functions/dom-manip';
 import { projectList, createProject, createTask, addProjectToList, addTaskToProject } from './functions/project';
 
 console.log("index.js");
@@ -54,6 +54,7 @@ eventNameForm().openNameForm();
 eventNameForm().closeNameForm();
 eventNameForm().submitName();
 openProjectName().openProject();
+openProjectEditName().openEditProject();
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
 eventTaskForm().submitTaskForm();
@@ -63,6 +64,7 @@ eventAddTask();
 // console.log(eventTaskForm());
 
 // /dom-element.js
+createProjectNewNameForm();
 // renderTask();
 
 

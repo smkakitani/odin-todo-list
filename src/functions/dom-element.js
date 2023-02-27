@@ -74,6 +74,7 @@ const createTaskForm = (indexOfProject, indexOfTask) => {
 
   labelName.setAttribute('for', 'form-name');
   labelName.textContent = 'Name';
+  inputName.type = 'text';
   inputName.id = 'form-name';
   inputName.maxLength = '24';
   inputName.value = `${projectList[indexOfProject].task[indexOfTask].taskTitle}`;
@@ -225,7 +226,51 @@ const createProjectNameBtn = function(projName, projIndex) {
   return addProjectName;
 };
 
+const createProjectNewNameForm = (indexProject) => {
+  // const deletethis = document.querySelector('#sidebar');
+
+  // div #edit-project-name
+  const divEditProjectName = document.createElement('div');
+  divEditProjectName.id = 'edit-project-name';
+  divEditProjectName.setAttribute('data-project-index', `${indexProject}`);
+
+  // form
+  // close btn
+  const btnClose = document.createElement('button');
+  btnClose.type = 'button';
+  btnClose.classList.add('close-name', 'grow');
+  btnClose.textContent = '❌';
+  divEditProjectName.appendChild(btnClose);
+
+  // form
+  const formNewName = document.createElement('form');
+  formNewName.action = '#';
+  divEditProjectName.appendChild(formNewName);
+
+  // label, input, button submit edit-name
+  const labelEditName = document.createElement('label');
+  const inputEditName = document.createElement('input');
+  const btnSubmitEditName = document.createElement('button');
+
+  labelEditName.setAttribute('for', 'edit-name');
+  labelEditName.textContent = 'New name:';
+  inputEditName.type = 'text';
+  inputEditName.name = 'edit-name';
+  inputEditName.id = 'edit-name';
+  inputEditName.maxLength = '32';
+  btnSubmitEditName.type = 'submit';
+  btnSubmitEditName.classList.add('submit-edit-name');
+  btnSubmitEditName.textContent = 'save';
+
+  formNewName.appendChild(labelEditName);
+  formNewName.appendChild(inputEditName);
+  formNewName.appendChild(btnSubmitEditName);
+
+  // deletethis.appendChild(divEditProjectName);
+  return divEditProjectName;
+};
 
 
 
-export { createProjectNameBtn, renderProject, renderTask, TaskFactory, createTaskForm };
+
+export { createProjectNameBtn, renderProject, renderTask, TaskFactory, createTaskForm, createProjectNewNameForm };
