@@ -239,7 +239,18 @@ const openProjectEditName = () => {
   };
 
   const closeEditProject = () => {
+    divSidebar.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON' && event.target.classList.contains('close-name')) {
+        const eventBtn = event.target;
+        const eventEditProjectName = eventBtn.parentNode;
 
+        // remove #edit-project-name from #sidebar
+        divSidebar.removeChild(eventEditProjectName);
+
+        // console.log(eventEditProjectName);
+      }
+      
+    });
   };
 
   return {

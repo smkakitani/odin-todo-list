@@ -55,6 +55,7 @@ eventNameForm().closeNameForm();
 eventNameForm().submitName();
 openProjectName().openProject();
 openProjectEditName().openEditProject();
+openProjectEditName().closeEditProject();
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
 eventTaskForm().submitTaskForm();
