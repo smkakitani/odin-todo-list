@@ -49,23 +49,29 @@ const initialProject = () => {
 };
 initialProject();
 
-// /dom-manip
+// ./dom-manip
 eventNameForm().openNameForm();
 eventNameForm().closeNameForm();
 eventNameForm().submitName();
+
 openProjectName().openProject();
+
 openProjectEditName().openEditProject();
 openProjectEditName().closeEditProject();
+openProjectEditName().submitEditProject();
+
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
 eventTaskForm().submitTaskForm();
 eventTaskForm().deleteTask();
+
 eventAddTask();
 
 // console.log(eventTaskForm());
 
 // /dom-element.js
-createProjectNewNameForm();
+
+
 // renderTask();
 
 

@@ -248,14 +248,37 @@ const openProjectEditName = () => {
         divSidebar.removeChild(eventEditProjectName);
 
         // console.log(eventEditProjectName);
+      }      
+    });
+  };
+
+  const submitEditProject = () => {
+    divSidebar.addEventListener('submit', (event) => {
+      if (event.target.tagName === 'FORM') {
+        const eventBtn = event.target;
+        const eventProjectIndex = eventBtn.parentNode.dataset.projectIndex;
+
+        // form field value
+        const inputEditName = eventBtn.querySelector('#edit-name').value;
+
+        // update it with input new value
+        projectList[eventProjectIndex].projectTitle = inputEditName;
+
+        // update DOM removing div.project-name-container
+
+
+        // console.log(projectList[eventProjectIndex].projectTitle);
       }
       
+      // console.log(event.target);
+      event.preventDefault();
     });
   };
 
   return {
     openEditProject,
     closeEditProject,
+    submitEditProject,
   }
 };
 

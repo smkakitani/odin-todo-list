@@ -234,7 +234,6 @@ const createProjectNewNameForm = (indexProject) => {
   divEditProjectName.id = 'edit-project-name';
   divEditProjectName.setAttribute('data-project-index', `${indexProject}`);
 
-  // form
   // close btn
   const btnClose = document.createElement('button');
   btnClose.type = 'button';
@@ -254,10 +253,13 @@ const createProjectNewNameForm = (indexProject) => {
 
   labelEditName.setAttribute('for', 'edit-name');
   labelEditName.textContent = 'New name:';
+
   inputEditName.type = 'text';
   inputEditName.name = 'edit-name';
   inputEditName.id = 'edit-name';
   inputEditName.maxLength = '32';
+  inputEditName.value = `${projectList[indexProject].projectTitle}`;
+  
   btnSubmitEditName.type = 'submit';
   btnSubmitEditName.classList.add('submit-edit-name');
   btnSubmitEditName.textContent = 'save';
