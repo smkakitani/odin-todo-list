@@ -221,6 +221,24 @@ const openProjectEditName = () => {
   const divSidebar = document.querySelector('#sidebar');
   const btnProjectName = document.querySelector('#project-list');
 
+  const renameProjectDom = (indexOfProject, newTitle) => { 
+    const parentNode = document.querySelector('#project-list');
+    const parentNodeLength = parentNode.childNodes.length;
+
+    for (let i = 0; i < parentNodeLength; i++) {
+      let nodeToRename = parentNode.childNodes[i];
+      let nodeBtn = nodeToRename.childNodes[0];
+      let nodeBtnIndex = nodeBtn.dataset.projectIndex;
+
+      if (nodeToRename.classList.contains('project-name-container') && nodeBtnIndex === indexOfProject) {
+        // parentNode.removeChild(nodeToRename)
+        nodeBtn.textContent = `${newTitle}`;
+
+        // console.log(nodeToRename);
+      }
+    }
+  };
+
   const openEditProject = () => {
     btnProjectName.addEventListener('click', (event) => {
       if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('project-edit')) {
@@ -265,9 +283,11 @@ const openProjectEditName = () => {
         projectList[eventProjectIndex].projectTitle = inputEditName;
 
         // update DOM removing div.project-name-container
+        renameProjectDom(eventProjectIndex, inputEditName);
 
 
-        // console.log(projectList[eventProjectIndex].projectTitle);
+        // console.log(eventProjectIndex)
+        console.log(projectList[eventProjectIndex].projectTitle);
       }
       
       // console.log(event.target);

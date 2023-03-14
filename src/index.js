@@ -59,6 +59,7 @@ openProjectName().openProject();
 openProjectEditName().openEditProject();
 openProjectEditName().closeEditProject();
 openProjectEditName().submitEditProject();
+// openProjectEditName().removeProjectDom();
 
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
