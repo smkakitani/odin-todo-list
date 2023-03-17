@@ -61,4 +61,4 @@ const removeTask = (projectIndex, taskIndex) => {
 
 
 
-export { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask };
+export { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask, removeProject };

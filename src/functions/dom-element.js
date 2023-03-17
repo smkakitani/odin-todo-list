@@ -217,10 +217,21 @@ const createProjectNameBtn = function(projName, projIndex) {
 
   btnIconEditName.appendChild(iconEditNameProject);
   
+  // trash icon
+  const iconDeleteNameProject = document.createElement('span');
+  const btnIconDeleteName = document.createElement('button');
+  iconDeleteNameProject.classList.add('material-symbols-outlined');
+  iconDeleteNameProject.textContent = 'delete';
+  btnIconDeleteName.type = 'button';
+  btnIconDeleteName.classList.add('project-delete', 'grow');
+
+  btnIconDeleteName.appendChild(iconDeleteNameProject);
 
 
+  // append itens to div
   divProjectName.appendChild(addProjectName);
   divProjectName.appendChild(btnIconEditName);
+  divProjectName.appendChild(btnIconDeleteName);
   projectList.appendChild(divProjectName);
 
   return addProjectName;

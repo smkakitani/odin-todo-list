@@ -5,7 +5,7 @@ import './styles/main-content.css';
 
 // js
 import { addProjectName, renderTask, renderProject, createProjectNameBtn, TaskFactory, createProjectNewNameForm } from './functions/dom-element';
-import { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName } from './functions/dom-manip';
+import { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName, deleteProjectName } from './functions/dom-manip';
 import { projectList, createProject, createTask, addProjectToList, addTaskToProject } from './functions/project';
 
 console.log("index.js");
@@ -59,7 +59,6 @@ openProjectName().openProject();
 openProjectEditName().openEditProject();
 openProjectEditName().closeEditProject();
 openProjectEditName().submitEditProject();
-// openProjectEditName().removeProjectDom();
 
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
@@ -67,6 +66,8 @@ eventTaskForm().submitTaskForm();
 eventTaskForm().deleteTask();
 
 eventAddTask();
+
+deleteProjectName().deleteProject();
 
 // console.log(eventTaskForm());
 

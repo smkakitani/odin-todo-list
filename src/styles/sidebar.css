@@ -89,15 +89,16 @@
   border-radius: 3px;
 }
 
-.project-edit {
+.project-edit, .project-delete {
   background-color: transparent;
   color: var(--color-white-hsl);
   border: none;
 }
 
-.project-edit:hover {
+.project-edit:hover, .project-delete:hover {
   cursor: pointer;
 }
+
 
 /* new project form */
 #name-form {

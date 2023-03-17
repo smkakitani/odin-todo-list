@@ -1,6 +1,6 @@
 // import
 import { createProjectNameBtn, renderProject, renderTask, createTaskForm, createProjectNewNameForm } from './dom-element';
-import { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask } from './project';
+import { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask, removeProject } from './project';
 
 
 
@@ -272,7 +272,7 @@ const openProjectEditName = () => {
 
   const submitEditProject = () => {
     divSidebar.addEventListener('submit', (event) => {
-      if (event.target.tagName === 'FORM') {
+      if (event.target.tagName === 'FORM' && event.target.parentNode.id === 'edit-project-name') {
         const eventBtn = event.target;
         const eventProjectIndex = eventBtn.parentNode.dataset.projectIndex;
 
@@ -285,11 +285,14 @@ const openProjectEditName = () => {
         // update DOM removing div.project-name-container
         renameProjectDom(eventProjectIndex, inputEditName);
 
+        // remove #edit-project-name from #sidebar
+        divSidebar.removeChild(eventBtn.parentNode);
 
-        // console.log(eventProjectIndex)
-        console.log(projectList[eventProjectIndex].projectTitle);
-      }
-      
+        // console.log(event.target.parentNode.id)
+        // console.log(projectList[eventProjectIndex].projectTitle);
+      } else {
+        return;
+      }      
       // console.log(event.target);
       event.preventDefault();
     });
@@ -302,4 +305,49 @@ const openProjectEditName = () => {
   }
 };
 
-export { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName };
+const deleteProjectName = () => {
+  const btnDeleteProject = document.querySelector('#project-list');
+
+  const removeProjectDom = () => {
+    const parentNode = document.querySelector('#project-list');
+    const parentNodeLength = parentNode.childNodes.length;
+
+    // can´t do firstChild because firstChild is +add project!!
+    for (let i = 1; i < parentNodeLength; i++) {
+      let nodeToRemove = parentNode.childNodes[1];
+
+      parentNode.removeChild(nodeToRemove);
+      // console.log(nodeToRemove);
+    }
+  };
+
+  const deleteProject = () => {
+    btnDeleteProject.addEventListener('click', (event) => {
+      if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('project-delete')) {
+        const eventBtn = event.target.parentNode;
+        const eventProject = eventBtn.parentNode;
+        const eventProjectIndex = eventProject.firstChild.dataset.projectIndex;
+
+        // get project index to remove in projectList
+        removeProject(eventProjectIndex);
+        removeProjectDom();
+
+        // render project's name btn
+        for (let i = 0; i < projectList.length; i++) {
+          let projectTitle = projectList[i].projectTitle;
+          let projectIndex = i;
+
+          createProjectNameBtn(projectTitle, projectIndex);
+          // console.log(projectTitle, projectIndex);
+        }
+        // console.log(projectList.length);
+      }      
+    });
+  };
+
+  return {
+    deleteProject,
+  }
+};
+
+export { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName, deleteProjectName };
