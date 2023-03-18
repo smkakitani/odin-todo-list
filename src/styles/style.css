@@ -95,3 +95,7 @@ footer {
 .grow:hover {
   transform: scale(1.5);
 }
+
+.checked {
+  text-decoration-line: line-through;
+}

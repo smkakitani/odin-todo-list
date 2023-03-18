@@ -4,6 +4,7 @@ import { projectList, createProject, createTask, addProjectToList, addTaskToProj
 
 
 
+// sidebar
 const eventNameForm = () => {
   const nameForm = document.querySelector('#name-form');
   const addProjectBtn = document.querySelector('.add-btn');
@@ -78,143 +79,6 @@ const openProjectName = () => {
   return {
     openProject,
   }
-};
-
-const eventTaskForm = () => {
-  const btnTask = document.querySelector('.project-container');
-
-  const removeTaskDom = () => {
-    const parentNode = document.querySelector('.task-container');
-      
-      while (parentNode.firstChild) {
-        parentNode.removeChild(parentNode.firstChild);
-      };
-  };
-
-  const openEditTask = () => {
-    btnTask.addEventListener('click', (event) => {
-      if (event.target.parentNode.classList.contains('task-edit') && event.target.parentNode.tagName === 'BUTTON') {
-        const eventBtn = event.target.parentNode;
-        const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
-        const eventTaskWrapper = eventBtn.parentNode.parentNode;
-        const eventTaskWrapperLast = eventTaskWrapper.lastElementChild; // to check last element child and use it to stop from opening another edit task
-        const eventProjectIndex = eventTaskWrapper.parentNode.parentNode.dataset.projectIndex;
-
-        if (eventTaskWrapperLast.classList.contains('project-task')) {
-          // append .task-form with task index to .task-wrapper with same task index
-          const taskForm = createTaskForm(eventProjectIndex, eventTaskIndex);
-          eventTaskWrapper.appendChild(taskForm);
-          
-          // console.log('open edit task');
-          } else  {
-            return;
-          }
-      };
-    });
-  };
-
-  const submitTaskForm = () => {
-    btnTask.addEventListener('submit', (event) => {
-      if (event.target.tagName === 'FORM') {
-        const eventBtn = event.target;
-        const eventTask = eventBtn.parentNode;
-        const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
-        const eventProjectIndex = eventBtn.parentNode.parentNode.parentNode.parentNode.dataset.projectIndex;
-
-        // form field values
-        let inputName = eventBtn.querySelector('#form-name').value;
-        let inputDescription = eventBtn.querySelector('#form-description').value;
-        let inputDueDate = eventBtn.querySelector('#form-due-date').value;
-
-        // update each item inside the task
-        projectList[eventProjectIndex].task[eventTaskIndex].taskTitle = inputName;
-        projectList[eventProjectIndex].task[eventTaskIndex].description = inputDescription;
-        projectList[eventProjectIndex].task[eventTaskIndex].date = inputDueDate;
-
-        // remove tasks and update all tasks
-        removeTaskDom();
-        renderTask(eventProjectIndex);
-      } else {
-        return;
-      }
-      event.preventDefault();
-    });
-  };
-
-  const cancelEditTask = () => {
-    btnTask.addEventListener('click', (event) => {
-      if (event.target.tagName === 'BUTTON' && event.target.classList.contains('form-cancel')) {
-        const eventBtn = event.target;
-        const eventTaskForm = eventBtn.parentNode.parentNode.parentNode;
-        const eventTaskWrapper = eventBtn.parentNode.parentNode.parentNode.parentNode;
-
-        // remove .task-form from current .task-wrapper
-        eventTaskWrapper.removeChild(eventTaskForm);
-
-        // console.log('cancel edit task');
-      } else {
-        return;
-      }   
-    });
-  };
-
-  const deleteTask = () => {
-    btnTask.addEventListener('click', (event) => {
-      if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('task-delete')) {
-        const eventBtn = event.target.parentNode;
-        const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
-        const eventProjectIndex = eventBtn.parentNode.parentNode.parentNode.parentNode.dataset.projectIndex;
-
-        removeTask(eventProjectIndex, eventTaskIndex);
-        removeTaskDom();
-        renderTask(eventProjectIndex);
-
-        // console.log('delete task');
-      } else {
-        return;
-      }
-    });
-  };
-
-  // console.log(btnTask);
-  return {
-    openEditTask,
-    cancelEditTask,
-    submitTaskForm,
-    deleteTask,
-  }
-};
-
-const eventAddTask = () => {
-  const btnAddTask = document.querySelector('.project-container');
-  let currentDay = new Date().toISOString().slice(0, 10);
-  const newTask = createTask('Task Title', 'Add a description here!', currentDay);
-
-  btnAddTask.addEventListener('click', (event) => {
-    if (event.target.tagName === "BUTTON" && event.target.matches('#add-task')) {
-      const eventBtn = event.target;
-      const eventProjectIndex = eventBtn.parentNode.parentNode.dataset.projectIndex;
-
-      // add default task to current project
-      addTaskToProject(eventProjectIndex, newTask);
-
-      // DOM stuff
-      removeTaskDom();
-      renderTask(eventProjectIndex);
-
-      // console.log('add task');
-    } else {
-      return;
-    }
-  });
-
-  const removeTaskDom = () => {
-    const parentNode = document.querySelector('.task-container');
-      
-      while (parentNode.firstChild) {
-        parentNode.removeChild(parentNode.firstChild);
-      };
-  };
 };
 
 const openProjectEditName = () => {
@@ -349,5 +213,169 @@ const deleteProjectName = () => {
     deleteProject,
   }
 };
+
+// main
+const eventTaskForm = () => {
+  const btnTask = document.querySelector('.project-container');
+
+  const removeTaskDom = () => {
+    const parentNode = document.querySelector('.task-container');
+      
+      while (parentNode.firstChild) {
+        parentNode.removeChild(parentNode.firstChild);
+      };
+  };
+
+  const removeInsertCheck = (element) => {
+    if (element.classList.contains('checked')) {
+      element.classList.remove('checked');
+    } else {
+      element.classList.add('checked');
+    }
+  };
+
+  const checkTask = () => {
+    btnTask.addEventListener('click', (event) => {
+      if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('task-check')) {
+        const eventBtn = event.target.parentNode;
+        const divProjectTask = eventBtn.parentNode;
+        const paraCheck = divProjectTask.querySelectorAll('div.project-task > p');
+
+        paraCheck.forEach(removeInsertCheck);
+
+        // console.log(paraCheck);
+      }
+      
+    });
+  };
+
+  const openEditTask = () => {
+    btnTask.addEventListener('click', (event) => {
+      if (event.target.parentNode.classList.contains('task-edit') && event.target.parentNode.tagName === 'BUTTON') {
+        const eventBtn = event.target.parentNode;
+        const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
+        const eventTaskWrapper = eventBtn.parentNode.parentNode;
+        const eventTaskWrapperLast = eventTaskWrapper.lastElementChild; // to check last element child and use it to stop from opening another edit task
+        const eventProjectIndex = eventTaskWrapper.parentNode.parentNode.dataset.projectIndex;
+
+        if (eventTaskWrapperLast.classList.contains('project-task')) {
+          // append .task-form with task index to .task-wrapper with same task index
+          const taskForm = createTaskForm(eventProjectIndex, eventTaskIndex);
+          eventTaskWrapper.appendChild(taskForm);
+          
+          // console.log('open edit task');
+          } else  {
+            return;
+          }
+      };
+    });
+  };
+
+  const submitTaskForm = () => {
+    btnTask.addEventListener('submit', (event) => {
+      if (event.target.tagName === 'FORM') {
+        const eventBtn = event.target;
+        const eventTask = eventBtn.parentNode;
+        const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
+        const eventProjectIndex = eventBtn.parentNode.parentNode.parentNode.parentNode.dataset.projectIndex;
+
+        // form field values
+        let inputName = eventBtn.querySelector('#form-name').value;
+        let inputDescription = eventBtn.querySelector('#form-description').value;
+        let inputDueDate = eventBtn.querySelector('#form-due-date').value;
+
+        // update each item inside the task
+        projectList[eventProjectIndex].task[eventTaskIndex].taskTitle = inputName;
+        projectList[eventProjectIndex].task[eventTaskIndex].description = inputDescription;
+        projectList[eventProjectIndex].task[eventTaskIndex].date = inputDueDate;
+
+        // remove tasks and update all tasks
+        removeTaskDom();
+        renderTask(eventProjectIndex);
+      } else {
+        return;
+      }
+      event.preventDefault();
+    });
+  };
+
+  const cancelEditTask = () => {
+    btnTask.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON' && event.target.classList.contains('form-cancel')) {
+        const eventBtn = event.target;
+        const eventTaskForm = eventBtn.parentNode.parentNode.parentNode;
+        const eventTaskWrapper = eventBtn.parentNode.parentNode.parentNode.parentNode;
+
+        // remove .task-form from current .task-wrapper
+        eventTaskWrapper.removeChild(eventTaskForm);
+
+        // console.log('cancel edit task');
+      } else {
+        return;
+      }   
+    });
+  };
+
+  const deleteTask = () => {
+    btnTask.addEventListener('click', (event) => {
+      if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('task-delete')) {
+        const eventBtn = event.target.parentNode;
+        const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
+        const eventProjectIndex = eventBtn.parentNode.parentNode.parentNode.parentNode.dataset.projectIndex;
+
+        removeTask(eventProjectIndex, eventTaskIndex);
+        removeTaskDom();
+        renderTask(eventProjectIndex);
+
+        // console.log('delete task');
+      } else {
+        return;
+      }
+    });
+  };
+
+  // console.log(btnTask);
+  return {
+    checkTask,
+    openEditTask,
+    cancelEditTask,
+    submitTaskForm,
+    deleteTask,
+  }
+};
+
+const eventAddTask = () => {
+  const btnAddTask = document.querySelector('.project-container');
+  let currentDay = new Date().toISOString().slice(0, 10);
+  const newTask = createTask('Task Title', 'Add a description here!', currentDay);
+
+  btnAddTask.addEventListener('click', (event) => {
+    if (event.target.tagName === "BUTTON" && event.target.matches('#add-task')) {
+      const eventBtn = event.target;
+      const eventProjectIndex = eventBtn.parentNode.parentNode.dataset.projectIndex;
+
+      // add default task to current project
+      addTaskToProject(eventProjectIndex, newTask);
+
+      // DOM stuff
+      removeTaskDom();
+      renderTask(eventProjectIndex);
+
+      // console.log('add task');
+    } else {
+      return;
+    }
+  });
+
+  const removeTaskDom = () => {
+    const parentNode = document.querySelector('.task-container');
+      
+      while (parentNode.firstChild) {
+        parentNode.removeChild(parentNode.firstChild);
+      };
+  };
+};
+
+
 
 export { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName, deleteProjectName };

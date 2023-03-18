@@ -29,7 +29,17 @@ const TaskFactory = (indexOfProject, indexOfTask) => {
   paraTaskDescription.textContent = `${taskDescription}`;
   divProjectTask.appendChild(paraTaskDescription);
 
-  // task button edit/delete
+  // task button check/edit/delete
+  const checkButton = document.createElement('button');
+  const iconCheckButton = document.createElement('span');
+  checkButton.type = 'button';
+  checkButton.classList.add('task-check');
+  checkButton.classList.add('grow');
+  iconCheckButton.classList.add('material-symbols-outlined');
+  iconCheckButton.textContent = 'check';
+  checkButton.appendChild(iconCheckButton);
+  divProjectTask.appendChild(checkButton);
+
   const editButton = document.createElement('button');
   const iconEditButton = document.createElement('span');
   editButton.type = 'button';

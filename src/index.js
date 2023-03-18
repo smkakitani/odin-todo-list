@@ -60,6 +60,7 @@ openProjectEditName().openEditProject();
 openProjectEditName().closeEditProject();
 openProjectEditName().submitEditProject();
 
+eventTaskForm().checkTask();
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
 eventTaskForm().submitTaskForm();
