@@ -1,6 +1,6 @@
 // import
 import { createProjectNameBtn, renderProject, renderTask, createTaskForm, createProjectNewNameForm } from './dom-element';
-import { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask, removeProject } from './project';
+import { projectList, createProject, createTask, addProjectToList, addTaskToProject, removeTask, removeProject, updateTask } from './project';
 
 
 
@@ -226,11 +226,19 @@ const eventTaskForm = () => {
       };
   };
 
-  const removeInsertCheck = (element) => {
-    if (element.classList.contains('checked')) {
-      element.classList.remove('checked');
-    } else {
-      element.classList.add('checked');
+  const removeCheck = (element) => {
+    element.classList.remove('checked');
+  };
+
+  const insertCheck = (element) => {
+    element.classList.add('checked');
+  };
+
+  const changeTaskChecked = (indexProject, indexTask) => {
+    if (projectList[indexProject].task[indexTask].isChecked === false) {
+      projectList[indexProject].task[indexTask].isChecked = true;
+    } else if (projectList[indexProject].task[indexTask].isChecked === true) {
+      projectList[indexProject].task[indexTask].isChecked = false;
     }
   };
 
@@ -238,12 +246,20 @@ const eventTaskForm = () => {
     btnTask.addEventListener('click', (event) => {
       if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('task-check')) {
         const eventBtn = event.target.parentNode;
-        const divProjectTask = eventBtn.parentNode;
-        const paraCheck = divProjectTask.querySelectorAll('div.project-task > p');
+        const eventTask = eventBtn.parentNode;
+        const eventTaskIndex = eventTask.dataset.taskIndex;
+        const paraCheck = eventTask.querySelectorAll('div.project-task > p');
+        const eventProject = eventTask.parentNode.parentNode.parentNode;
+        const eventProjectIndex = eventProject.dataset.projectIndex;
 
-        paraCheck.forEach(removeInsertCheck);
+        changeTaskChecked(eventProjectIndex, eventTaskIndex);
 
-        // console.log(paraCheck);
+        if (projectList[eventProjectIndex].task[eventTaskIndex].isChecked === true) {
+          paraCheck.forEach(insertCheck);
+        } else {
+          paraCheck.forEach(removeCheck);
+        }        
+        // console.log(projectList[eventProjectIndex].task[eventTaskIndex]);
       }
       
     });
@@ -273,28 +289,37 @@ const eventTaskForm = () => {
 
   const submitTaskForm = () => {
     btnTask.addEventListener('submit', (event) => {
-      if (event.target.tagName === 'FORM') {
+      if (event.target.tagName === 'FORM' && event.target.parentNode.classList.contains('task-form')) {
         const eventBtn = event.target;
         const eventTask = eventBtn.parentNode;
         const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
         const eventProjectIndex = eventBtn.parentNode.parentNode.parentNode.parentNode.dataset.projectIndex;
 
         // form field values
-        let inputName = eventBtn.querySelector('#form-name').value;
+        let inputTitle = eventBtn.querySelector('#form-name').value;
         let inputDescription = eventBtn.querySelector('#form-description').value;
         let inputDueDate = eventBtn.querySelector('#form-due-date').value;
 
+        // set current project and current task
+        const currentProject = projectList[eventProjectIndex];
+        const currentTask = currentProject.task[eventTaskIndex];
+
+        
+
         // update each item inside the task
-        projectList[eventProjectIndex].task[eventTaskIndex].taskTitle = inputName;
-        projectList[eventProjectIndex].task[eventTaskIndex].description = inputDescription;
-        projectList[eventProjectIndex].task[eventTaskIndex].date = inputDueDate;
+        updateTask(currentTask, inputTitle, inputDescription, inputDueDate);
 
         // remove tasks and update all tasks
-        removeTaskDom();
-        renderTask(eventProjectIndex);
+        /* removeTaskDom();
+        renderTask(eventProjectIndex); */
+
+        console.log(currentTask);
+        event.stopImmediatePropagation();
+        event.preventDefault();
       } else {
         return;
       }
+      
       event.preventDefault();
     });
   };
@@ -353,18 +378,23 @@ const eventAddTask = () => {
     if (event.target.tagName === "BUTTON" && event.target.matches('#add-task')) {
       const eventBtn = event.target;
       const eventProjectIndex = eventBtn.parentNode.parentNode.dataset.projectIndex;
+      // 
+      const currentProject = projectList[eventProjectIndex];
 
       // add default task to current project
-      addTaskToProject(eventProjectIndex, newTask);
+      addTaskToProject(currentProject, newTask);
 
       // DOM stuff
       removeTaskDom();
       renderTask(eventProjectIndex);
+     
 
-      // console.log('add task');
+      console.log(currentProject);
     } else {
       return;
     }
+    // console.log(createTask);
+    event.stopImmediatePropagation();
   });
 
   const removeTaskDom = () => {

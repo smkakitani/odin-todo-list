@@ -36,8 +36,8 @@ const initialProject = () => {
   createProjectNameBtn(secondProject.projectTitle, indexOfProject2);
 
   // add task to project
-  addTaskToProject(indexOfProject, firstTask);
-  // addTaskToProject(indexOfProject, secondTask);
+  addTaskToProject(firstProject, firstTask);
+  addTaskToProject(secondProject, secondTask);
 
   // render project
   renderProject(indexOfProject);
@@ -60,7 +60,7 @@ openProjectEditName().openEditProject();
 openProjectEditName().closeEditProject();
 openProjectEditName().submitEditProject();
 
-eventTaskForm().checkTask();
+// eventTaskForm().checkTask();
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
 eventTaskForm().submitTaskForm();
@@ -77,8 +77,8 @@ deleteProjectName().deleteProject();
 
 // renderTask();
 
-
-
+/* projectList[0].task[0].taskTitle = "Dog";
+console.log(projectList[0].task[0]) */
 
 
 /* for (const ele of projectList[0].task) {

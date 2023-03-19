@@ -5,6 +5,7 @@ const TaskFactory = (indexOfProject, indexOfTask) => {
   const taskTitle = projectList[indexOfProject].task[indexOfTask].taskTitle;
   const taskDescription = projectList[indexOfProject].task[indexOfTask].description;
   const taskDate = projectList[indexOfProject].task[indexOfTask].date;
+  const taskCheck = projectList[indexOfProject].task[indexOfTask].isChecked;
 
   // div project-task
   const divProjectTask = document.createElement('div');
@@ -28,6 +29,15 @@ const TaskFactory = (indexOfProject, indexOfTask) => {
   paraTaskDescription.classList.add('task-description');
   paraTaskDescription.textContent = `${taskDescription}`;
   divProjectTask.appendChild(paraTaskDescription);
+
+  // add .checked if task.isChecked is true for DOM manipulation
+  if (taskCheck === true) {
+    paraTaskName.classList.add('checked');
+    paraTaskDate.classList.add('checked');
+    paraTaskDescription.classList.add('checked');
+
+    // console.log('task factory task is true');
+  }
 
   // task button check/edit/delete
   const checkButton = document.createElement('button');
