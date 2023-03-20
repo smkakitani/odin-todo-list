@@ -1,6 +1,133 @@
 // import
 import { projectList } from './project';
 
+
+
+// sidebar
+const createProjectNameBtn = function(projName, projIndex) {
+  const projectList = document.querySelector('#project-list');
+
+  // div for each button
+  const divProjectName = document.createElement('div');
+  divProjectName.classList.add('project-name-container');
+
+  // button with project index
+  const addProjectName = document.createElement('button');
+  addProjectName.type = 'button';
+  addProjectName.classList.add('project-btn');
+  addProjectName.setAttribute('data-project-index', `${projIndex}`);
+  addProjectName.textContent = `${projName}`;
+
+  // edit icon
+  const iconEditNameProject = document.createElement('span');
+  const btnIconEditName = document.createElement('button');
+  iconEditNameProject.classList.add('material-symbols-outlined');
+  iconEditNameProject.textContent = 'edit ';
+  btnIconEditName.type = 'button';
+  btnIconEditName.classList.add('project-edit', 'grow');
+
+  btnIconEditName.appendChild(iconEditNameProject);
+  
+  // trash icon
+  const iconDeleteNameProject = document.createElement('span');
+  const btnIconDeleteName = document.createElement('button');
+  iconDeleteNameProject.classList.add('material-symbols-outlined');
+  iconDeleteNameProject.textContent = 'delete';
+  btnIconDeleteName.type = 'button';
+  btnIconDeleteName.classList.add('project-delete', 'grow');
+
+  btnIconDeleteName.appendChild(iconDeleteNameProject);
+
+
+  // append itens to div
+  divProjectName.appendChild(addProjectName);
+  divProjectName.appendChild(btnIconEditName);
+  divProjectName.appendChild(btnIconDeleteName);
+  projectList.appendChild(divProjectName);
+
+  return addProjectName;
+};
+
+const createProjectNewNameForm = (indexProject) => {
+  // const deletethis = document.querySelector('#sidebar');
+
+  // div #edit-project-name
+  const divEditProjectName = document.createElement('div');
+  divEditProjectName.id = 'edit-project-name';
+  divEditProjectName.setAttribute('data-project-index', `${indexProject}`);
+
+  // close btn
+  const btnClose = document.createElement('button');
+  btnClose.type = 'button';
+  btnClose.classList.add('close-name', 'grow');
+  btnClose.textContent = '❌';
+  divEditProjectName.appendChild(btnClose);
+
+  // form
+  const formNewName = document.createElement('form');
+  formNewName.action = '#';
+  divEditProjectName.appendChild(formNewName);
+
+  // label, input, button submit edit-name
+  const labelEditName = document.createElement('label');
+  const inputEditName = document.createElement('input');
+  const btnSubmitEditName = document.createElement('button');
+
+  labelEditName.setAttribute('for', 'edit-name');
+  labelEditName.textContent = 'New name:';
+
+  inputEditName.type = 'text';
+  inputEditName.name = 'edit-name';
+  inputEditName.id = 'edit-name';
+  inputEditName.maxLength = '32';
+  inputEditName.value = `${projectList[indexProject].projectTitle}`;
+  
+  btnSubmitEditName.type = 'submit';
+  btnSubmitEditName.classList.add('submit-edit-name');
+  btnSubmitEditName.textContent = 'save';
+
+  formNewName.appendChild(labelEditName);
+  formNewName.appendChild(inputEditName);
+  formNewName.appendChild(btnSubmitEditName);
+
+  // deletethis.appendChild(divEditProjectName);
+  return divEditProjectName;
+};
+
+const renderCurrentDay = () => {
+  // current dates
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const currentDate = new Date();
+  const currentWeekday = days[currentDate.getDay()];
+  const currentDay = currentDate.getDate();
+  const currentMonth = months[currentDate.getMonth()];
+  console.log(currentWeekday, currentMonth, currentDay);
+
+  // div #date
+  const divDate = document.querySelector('#date');
+
+  const spanWeekdays = document.createElement('span');
+  const spanMonth = document.createElement('span');
+  const spanDay = document.createElement('span');
+
+  spanWeekdays.id = 'weekdays';
+  spanMonth.id = 'month';
+  spanDay.id = 'day';
+
+  spanWeekdays.textContent = `${currentWeekday}`;
+  spanMonth.textContent = `${currentMonth}`;
+  spanDay.textContent = `${currentDay}`;
+
+  // append to divDate
+  divDate.appendChild(spanWeekdays);
+  divDate.appendChild(spanMonth);
+  divDate.appendChild(spanDay);
+
+  return divDate;
+};
+
+// main
 const TaskFactory = (indexOfProject, indexOfTask) => {
   const taskTitle = projectList[indexOfProject].task[indexOfTask].taskTitle;
   const taskDescription = projectList[indexOfProject].task[indexOfTask].description;
@@ -213,97 +340,8 @@ const renderProject = (projectIndex)  => {
   return divProjectContainer;
 };
 
-const createProjectNameBtn = function(projName, projIndex) {
-  const projectList = document.querySelector('#project-list');
-
-  // div for each button
-  const divProjectName = document.createElement('div');
-  divProjectName.classList.add('project-name-container');
-
-  // button with project index
-  const addProjectName = document.createElement('button');
-  addProjectName.type = 'button';
-  addProjectName.classList.add('project-btn');
-  addProjectName.setAttribute('data-project-index', `${projIndex}`);
-  addProjectName.textContent = `${projName}`;
-
-  // edit icon
-  const iconEditNameProject = document.createElement('span');
-  const btnIconEditName = document.createElement('button');
-  iconEditNameProject.classList.add('material-symbols-outlined');
-  iconEditNameProject.textContent = 'edit ';
-  btnIconEditName.type = 'button';
-  btnIconEditName.classList.add('project-edit', 'grow');
-
-  btnIconEditName.appendChild(iconEditNameProject);
-  
-  // trash icon
-  const iconDeleteNameProject = document.createElement('span');
-  const btnIconDeleteName = document.createElement('button');
-  iconDeleteNameProject.classList.add('material-symbols-outlined');
-  iconDeleteNameProject.textContent = 'delete';
-  btnIconDeleteName.type = 'button';
-  btnIconDeleteName.classList.add('project-delete', 'grow');
-
-  btnIconDeleteName.appendChild(iconDeleteNameProject);
-
-
-  // append itens to div
-  divProjectName.appendChild(addProjectName);
-  divProjectName.appendChild(btnIconEditName);
-  divProjectName.appendChild(btnIconDeleteName);
-  projectList.appendChild(divProjectName);
-
-  return addProjectName;
-};
-
-const createProjectNewNameForm = (indexProject) => {
-  // const deletethis = document.querySelector('#sidebar');
-
-  // div #edit-project-name
-  const divEditProjectName = document.createElement('div');
-  divEditProjectName.id = 'edit-project-name';
-  divEditProjectName.setAttribute('data-project-index', `${indexProject}`);
-
-  // close btn
-  const btnClose = document.createElement('button');
-  btnClose.type = 'button';
-  btnClose.classList.add('close-name', 'grow');
-  btnClose.textContent = '❌';
-  divEditProjectName.appendChild(btnClose);
-
-  // form
-  const formNewName = document.createElement('form');
-  formNewName.action = '#';
-  divEditProjectName.appendChild(formNewName);
-
-  // label, input, button submit edit-name
-  const labelEditName = document.createElement('label');
-  const inputEditName = document.createElement('input');
-  const btnSubmitEditName = document.createElement('button');
-
-  labelEditName.setAttribute('for', 'edit-name');
-  labelEditName.textContent = 'New name:';
-
-  inputEditName.type = 'text';
-  inputEditName.name = 'edit-name';
-  inputEditName.id = 'edit-name';
-  inputEditName.maxLength = '32';
-  inputEditName.value = `${projectList[indexProject].projectTitle}`;
-  
-  btnSubmitEditName.type = 'submit';
-  btnSubmitEditName.classList.add('submit-edit-name');
-  btnSubmitEditName.textContent = 'save';
-
-  formNewName.appendChild(labelEditName);
-  formNewName.appendChild(inputEditName);
-  formNewName.appendChild(btnSubmitEditName);
-
-  // deletethis.appendChild(divEditProjectName);
-  return divEditProjectName;
-};
 
 
 
 
-export { createProjectNameBtn, renderProject, renderTask, TaskFactory, createTaskForm, createProjectNewNameForm };
+export { createProjectNameBtn, renderProject, renderTask, TaskFactory, createTaskForm, createProjectNewNameForm, renderCurrentDay };

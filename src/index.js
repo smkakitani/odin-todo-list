@@ -4,11 +4,22 @@ import './styles/sidebar.css';
 import './styles/main-content.css';
 
 // js
-import { addProjectName, renderTask, renderProject, createProjectNameBtn, TaskFactory, createProjectNewNameForm } from './functions/dom-element';
+import { addProjectName, renderTask, renderProject, createProjectNameBtn, TaskFactory, createProjectNewNameForm, renderCurrentDay } from './functions/dom-element';
 import { eventNameForm, openProjectName, eventTaskForm, eventAddTask, openProjectEditName, deleteProjectName } from './functions/dom-manip';
 import { projectList, createProject, createTask, addProjectToList, addTaskToProject } from './functions/project';
 
 console.log("index.js");
+
+
+
+/* const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const currentDate = new Date();
+const currentWeekday = days[currentDate.getDay()];
+const currentDay = currentDate.getDate();
+const currentMonth = months[currentDate.getMonth()];
+
+console.log(currentWeekday, currentMonth, currentDay); */
 
 
 
@@ -47,6 +58,7 @@ const initialProject = () => {
 
   
 };
+renderCurrentDay();
 initialProject();
 
 // ./dom-manip
