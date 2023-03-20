@@ -19,7 +19,7 @@
 /*  */
 
 :root {
-  --color-bg: rgb(83, 83, 83);
+  --color-bg: hsl(265, 40%, 83%);
   --color-purple: hsl(265, 47%, 22%);
   --color-purple-light: hsl(265, 47%, 33%);
   --color-white-hsl: hsl(0, 0%, 100%);
@@ -80,6 +80,7 @@ footer {
 
 /* footer */
 footer {
+  color: var(--color-white-hsl);
   font-family: 'Comfortaa', cursive, sans-serif;
   height: 40px;
   width: 100%;

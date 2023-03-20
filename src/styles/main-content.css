@@ -1,5 +1,5 @@
 main {
-  background-color: rgb(90, 119, 90);
+  background-color: transparent;
 }
 
 #content {
@@ -10,7 +10,8 @@ main {
 }
 
 .project-container {
-  background-color: aliceblue;
+  background-color:hsl(267, 100%, 96%);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   font-family: 'Comfortaa', cursive, sans-serif;
   height: 100%;
   width: max(60%, 500px);
@@ -37,6 +38,7 @@ main {
 
 .project-task  {
   background-color: var(--color-purple);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   color: var(--color-white-hsl);
   height: max-content;
   width: 100%;
@@ -165,14 +167,13 @@ main {
 
 /* add task button */
 .project-container > div > button {
-  background-color: transparent/* var(--color-purple-light) */;
+  background-color: transparent;
   font-family: inherit;
   font-size: 1.25rem;
   padding: 0.3em;
 
   border: 2px solid var(--color-purple-light);
   border-radius: 3px;
-  /* position: relative; */
 }
 
 .project-container > div > button:hover {
