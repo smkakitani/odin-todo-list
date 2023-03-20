@@ -60,7 +60,7 @@ openProjectEditName().openEditProject();
 openProjectEditName().closeEditProject();
 openProjectEditName().submitEditProject();
 
-// eventTaskForm().checkTask();
+eventTaskForm().checkTask();
 eventTaskForm().openEditTask();
 eventTaskForm().cancelEditTask();
 eventTaskForm().submitTaskForm();
@@ -69,41 +69,3 @@ eventTaskForm().deleteTask();
 eventAddTask();
 
 deleteProjectName().deleteProject();
-
-// console.log(eventTaskForm());
-
-// /dom-element.js
-
-
-// renderTask();
-
-/* projectList[0].task[0].taskTitle = "Dog";
-console.log(projectList[0].task[0]) */
-
-
-/* for (const ele of projectList[0].task) {
-  console.log(ele);
-}; */
-
-/* const currentProject = projectList[indexOfProject];
-const storedTask = currentProject.task;
-
-for (const element of storedTask) {
-  console.log(element)
-} */
-
-
-
-// projectList.push(cocoPro);
-// projectList[2].task.push(myTask);
-
-// addProject(cocoPro)
-// addTask("2", myTask)
-// console.log(projectList)
-
-// const indexOfProject = projectList.indexOf(cocoPro);
-// console.log(indexOfProject);
-
-
-// console.log(projectList[1].task);
-// console.log(projectList[2]);

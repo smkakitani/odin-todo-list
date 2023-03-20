@@ -23,12 +23,12 @@ const projectList = [
 
 // create task
 const createTask = (title, description, date) => {
-  // const isChecked = false;
+  const isChecked = false;
   return {
     taskTitle: title,
     description,
     date,
-    // isChecked,
+    isChecked,
   }
 };
 
@@ -47,7 +47,6 @@ const addProjectToList = (newProject) => {
 
 const addTaskToProject = (currentProject, newTask) => {
   currentProject.task.push(newTask);
-  // projectList[projectIndex].task.push(newTask);
 };
 
 const removeProject = (projectIndex) => {
@@ -59,12 +58,20 @@ const removeTask = (projectIndex, taskIndex) => {
 };
 
 // update project and tasks
-const updateTask = (currentTask, newTitle, newDescription, newDate) => {
-  // currentTask.forEach(x => console.log(x));
+const updateTask = (currentProject, currentTask, newTitle, newDescription, newDate) => {
+  projectList.forEach((project) => {
+    if (projectList.indexOf(currentProject) === projectList.indexOf(project) && currentProject.projectTitle === project.projectTitle) {
+      project.task.forEach((task) => {
+        if (currentProject.task.indexOf(currentTask) === project.task.indexOf(task) && currentTask.taskTitle === task.taskTitle) {
+          task.taskTitle = newTitle;
+          task.description = newDescription;
+          task.date = newDate;
 
-  /* projectList[projectIndex].task[taskIndex].taskTitle = newTitle;
-  projectList[projectIndex].task[taskIndex].description = newDescription;
-  projectList[projectIndex].task[taskIndex].date = newDate; */
+          // console.log(currentProject)
+        }
+      });
+    }
+  });
 };
 
 

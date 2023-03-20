@@ -153,7 +153,7 @@ const openProjectEditName = () => {
         divSidebar.removeChild(eventBtn.parentNode);
 
         // console.log(event.target.parentNode.id)
-        // console.log(projectList[eventProjectIndex].projectTitle);
+        console.log(projectList);
       } else {
         return;
       }      
@@ -245,6 +245,7 @@ const eventTaskForm = () => {
   const checkTask = () => {
     btnTask.addEventListener('click', (event) => {
       if (event.target.parentNode.tagName === 'BUTTON' && event.target.parentNode.classList.contains('task-check')) {
+        // event targets
         const eventBtn = event.target.parentNode;
         const eventTask = eventBtn.parentNode;
         const eventTaskIndex = eventTask.dataset.taskIndex;
@@ -252,8 +253,10 @@ const eventTaskForm = () => {
         const eventProject = eventTask.parentNode.parentNode.parentNode;
         const eventProjectIndex = eventProject.dataset.projectIndex;
 
+        // change task isChecked true/false
         changeTaskChecked(eventProjectIndex, eventTaskIndex);
 
+        // will line-through only is isChecked is true
         if (projectList[eventProjectIndex].task[eventTaskIndex].isChecked === true) {
           paraCheck.forEach(insertCheck);
         } else {
@@ -290,6 +293,7 @@ const eventTaskForm = () => {
   const submitTaskForm = () => {
     btnTask.addEventListener('submit', (event) => {
       if (event.target.tagName === 'FORM' && event.target.parentNode.classList.contains('task-form')) {
+        // event targets
         const eventBtn = event.target;
         const eventTask = eventBtn.parentNode;
         const eventTaskIndex = eventBtn.parentNode.dataset.taskIndex;
@@ -302,24 +306,21 @@ const eventTaskForm = () => {
 
         // set current project and current task
         const currentProject = projectList[eventProjectIndex];
-        const currentTask = currentProject.task[eventTaskIndex];
-
-        
+        const currentTask = currentProject.task[eventTaskIndex];        
 
         // update each item inside the task
-        updateTask(currentTask, inputTitle, inputDescription, inputDueDate);
+        updateTask(currentProject, currentTask, inputTitle, inputDescription, inputDueDate);
 
         // remove tasks and update all tasks
-        /* removeTaskDom();
-        renderTask(eventProjectIndex); */
+        removeTaskDom();
+        renderTask(eventProjectIndex);
 
-        console.log(currentTask);
+        // console.log(currentProject);
         event.stopImmediatePropagation();
         event.preventDefault();
       } else {
         return;
-      }
-      
+      }      
       event.preventDefault();
     });
   };
@@ -372,10 +373,13 @@ const eventTaskForm = () => {
 const eventAddTask = () => {
   const btnAddTask = document.querySelector('.project-container');
   let currentDay = new Date().toISOString().slice(0, 10);
-  const newTask = createTask('Task Title', 'Add a description here!', currentDay);
 
   btnAddTask.addEventListener('click', (event) => {
     if (event.target.tagName === "BUTTON" && event.target.matches('#add-task')) {
+      // create a new task
+      const newTask = createTask('Task Title', 'Add a description here!', currentDay);
+
+      // events target
       const eventBtn = event.target;
       const eventProjectIndex = eventBtn.parentNode.parentNode.dataset.projectIndex;
       // 
@@ -386,10 +390,9 @@ const eventAddTask = () => {
 
       // DOM stuff
       removeTaskDom();
-      renderTask(eventProjectIndex);
-     
+      renderTask(eventProjectIndex);     
 
-      console.log(currentProject);
+      // console.log(currentProject);
     } else {
       return;
     }
